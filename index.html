@@ -1,73 +1,171 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Isabella 💜</title>
-    <style>
-        body { margin: 0; font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); color: white; text-align: center; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow: hidden; }
-        .container { margin-top: 50px; padding: 20px; z-index: 10; width: 90%; }
-        h1 { font-size: 2rem; text-shadow: 0 0 15px #ff4da6; margin-bottom: 20px; }
-        .glow { color: #ff66c4; text-shadow: 0 0 20px #ff66c4; }
-        .buttons { margin-top: 50px; position: relative; width: 100%; height: 250px; }
-        button { padding: 15px 25px; font-size: 18px; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; transition: 0.1s; position: absolute; }
-        #si { background: #ff4da6; color: white; box-shadow: 0 0 15px #ff4da6; left: 50%; transform: translateX(-110%); }
-        #no { background: #444; color: white; left: 50%; transform: translateX(10%); white-space: nowrap; }
-        .final-img { width: 80%; max-width: 300px; border-radius: 20px; border: 3px solid #ff4da6; box-shadow: 0 0 20px #ff4da6; margin-top: 20px; }
-        .heart { position: absolute; color: #ff4da6; animation: fall 3s linear infinite; pointer-events: none; }
-        @keyframes fall { 0% { transform: translateY(-100px); opacity: 1; } 100% { transform: translateY(100vh); opacity: 0; } }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Isabella 💜</title>
+
+<style>
+body{
+    margin:0;
+    font-family:sans-serif;
+    background: linear-gradient(135deg,#0f0c29,#302b63,#24243e);
+    color:white;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    min-height:100vh;
+    overflow:hidden;
+}
+
+.container{
+    margin-top:40px;
+    z-index:10;
+}
+
+h1{
+    font-size:2.5rem;
+    text-shadow:0 0 15px #ff4da6;
+}
+
+.glow{
+    color:#ff66c4;
+    text-shadow:0 0 20px #ff66c4;
+}
+
+.buttons{
+    margin-top:30px;
+    position:relative;
+    height:120px;
+}
+
+button{
+    padding:15px 30px;
+    font-size:18px;
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+#si{
+    background:#ff4da6;
+    color:white;
+    margin-right:20px;
+}
+
+#no{
+    background:#444;
+    color:white;
+    position:absolute;
+    left:60%;
+}
+
+.gallery{
+    margin-top:40px;
+    display:flex;
+    gap:15px;
+    justify-content:center;
+}
+
+.gallery img{
+    width:150px;
+    height:200px;
+    object-fit:cover;
+    border-radius:15px;
+    border:2px solid #ff66c4;
+    box-shadow:0 0 10px #ff66c4;
+}
+
+.heart{
+    position:fixed;
+    color:#ff4da6;
+    animation:fall 3s linear infinite;
+}
+
+@keyframes fall{
+    0%{transform:translateY(-100px);opacity:1;}
+    100%{transform:translateY(100vh);opacity:0;}
+}
+</style>
 </head>
+
 <body>
 
-    <div id="contenido" class="container">
-        <h1>Isabella, <span class="glow">¿Quieres ser mi San Valentín?</span> 💜</h1>
-        <div class="buttons">
-            <button id="si" onclick="aceptar()">¡SÍ! 😍</button>
-            <button id="no" onmouseover="escapar()" onclick="escapar()">No</button>
-        </div>
-    </div>
+<div class="container">
+<h1>Isabella <span class="glow">¿Quieres ser mi San Valentín??</span> 💜</h1>
 
-    <script>
-        let frases = [
-            "Sabía que dirías que sí, creo que te equivocaste",
-            "Te doy otra oportunidad",
-            "La dislexia no te deja decir que sí",
-            "Te amo, dime que sí"
-        ];
-        let indiceFrase = 0;
+<div class="buttons">
+<button id="si" onclick="aceptar()">Sí 💖</button>
+<button id="no" onclick="moverBoton()">No</button>
+</div>
 
-        function escapar() {
-            const btnNo = document.getElementById('no');
-            btnNo.innerText = frases[indiceFrase];
-            indiceFrase = (indiceFrase + 1) % frases.length;
+<div class="gallery">
+<img src="foto1.jpg..heic" alt="Nosotros 1">
+<img src="foto2.jpg..jpeg" alt="Nosotros 2">
+<img src="gafete.png..jpeg" alt="Gafete">
+</div>
+</div>
 
-            const x = Math.random() * (window.innerWidth - btnNo.offsetWidth);
-            const y = Math.random() * (window.innerHeight - btnNo.offsetHeight);
-            
-            btnNo.style.position = "fixed";
-            btnNo.style.left = x + "px";
-            btnNo.style.top = y + "px";
-            btnNo.style.transform = "none";
-        }
+<script>
 
-        function aceptar() {
-            const contenido = document.getElementById('contenido');
-            contenido.innerHTML = `
-                <h1 class="glow">Eres lo mejor que me ha pasado, nos vemos pronto! 🥰</h1>
-                <img src="foto1.jpg..heic" class="final-img">
-            `;
-            setInterval(crearCorazon, 300);
-        }
+let frases = [
+"Creo que te equivocaste",
+"Te doy otra oportunidad",
+"La dislexia no te deja decir que sí",
+"Te amo dime que sí",
+"Amor por favor 🥺"
+];
 
-        function crearCorazon() {
-            const corazon = document.createElement('div');
-            corazon.classList.add('heart');
-            corazon.innerHTML = '💜';
-            corazon.style.left = Math.random() * 100 + "vw";
-            document.body.appendChild(corazon);
-            setTimeout(() => { corazon.remove(); }, 3000);
-        }
-    </script>
+let indice = 0;
+
+function moverBoton(){
+const btn = document.getElementById("no");
+
+btn.innerText = frases[indice];
+indice = (indice + 1) % frases.length;
+
+let x = Math.random() * (window.innerWidth - btn.offsetWidth);
+let y = Math.random() * (window.innerHeight - btn.offsetHeight);
+
+btn.style.position = "fixed";
+btn.style.left = x + "px";
+btn.style.top = y + "px";
+}
+
+function aceptar(){
+document.body.innerHTML = `
+<div style="
+background:url('foto1.jpg..heic');
+background-size:cover;
+background-position:center;
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+">
+<h1 style="font-size:3rem;">Eres lo mejor que me ha pasado 💖</h1>
+<p style="font-size:1.8rem;">Nos vemos pronto. Te amo 🩷</p>
+</div>
+`;
+setInterval(crearCorazon,300);
+}
+
+function crearCorazon(){
+const heart = document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML = "💜";
+heart.style.left = Math.random()*100 + "vw";
+heart.style.fontSize = (Math.random()*20 + 20) + "px";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),3000);
+}
+
+</script>
+
 </body>
 </html>
