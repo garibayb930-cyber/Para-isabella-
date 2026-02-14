@@ -5,34 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Para Isabella 💜</title>
     <style>
-        body { margin: 0; font-family: sans-serif; background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); color: white; text-align: center; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow-x: hidden; }
-        .container { margin-top: 50px; padding: 20px; z-index: 10; }
-        h1 { font-size: 2.5rem; text-shadow: 0 0 15px #ff4da6; }
+        body { margin: 0; font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); color: white; text-align: center; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow: hidden; }
+        .container { margin-top: 50px; padding: 20px; z-index: 10; width: 90%; }
+        h1 { font-size: 2rem; text-shadow: 0 0 15px #ff4da6; margin-bottom: 20px; }
         .glow { color: #ff66c4; text-shadow: 0 0 20px #ff66c4; }
-        .buttons { margin-top: 30px; height: 150px; position: relative; width: 100%; }
-        button { padding: 15px 30px; font-size: 18px; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; transition: 0.3s; }
-        #si { background: #ff4da6; color: white; box-shadow: 0 0 15px #ff4da6; }
-        #no { background: #444; color: white; position: absolute; left: 50%; transform: translateX(-50%); }
-        .gallery { margin-top: 40px; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; padding-bottom: 50px; }
-        .gallery img { width: 150px; height: 200px; object-fit: cover; border-radius: 15px; border: 2px solid #ff66c4; box-shadow: 0 0 10px #ff66c4; }
-        .heart { position: absolute; color: #ff4da6; animation: fall 3s linear infinite; pointer-events: none; }
+        .buttons { margin-top: 50px; position: relative; width: 100%; height: 300px; }
+        button { padding: 15px 25px; font-size: 18px; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; transition: 0.2s; position: absolute; }
+        #si { background: #ff4da6; color: white; box-shadow: 0 0 15px #ff4da6; left: 50%; transform: translateX(-110%); top: 0; }
+        #no { background: #444; color: white; left: 50%; transform: translateX(10%); top: 0; white-space: nowrap; }
+        .gallery { margin-top: 20px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .gallery img { width: 100px; height: 130px; object-fit: cover; border-radius: 10px; border: 1px solid #ff66c4; opacity: 0.7; }
+        .final-img { width: 250px; height: 350px; object-fit: cover; border-radius: 20px; border: 3px solid #ff4da6; box-shadow: 0 0 20px #ff4da6; margin-top: 20px; }
+        .heart { position: absolute; color: #ff4da6; animation: fall 3s linear infinite; pointer-events: none; z-index: 1; }
         @keyframes fall { 0% { transform: translateY(-100px); opacity: 1; } 100% { transform: translateY(100vh); opacity: 0; } }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <div id="contenido" class="container">
         <h1>Isabella, <span class="glow">¿Quieres ser mi San Valentín?</span> 💜</h1>
         
         <div class="buttons">
             <button id="si" onclick="aceptar()">¡SÍ! 😍</button>
-            <button id="no" onmouseover="moverBoton()" onclick="moverBoton()">No</button>
+            <button id="no" onmouseover="acc No()" onclick="acc No()">No</button>
         </div>
 
         <div class="gallery">
-            <img src="foto1.jpg..heic" alt="Nosotros 1">
-            <img src="foto2.jpg..jpeg" alt="Nosotros 2">
-            <img src="gafete.png..jpeg" alt="Gafete">
+            <img src="foto2.jpg..jpeg">
+            <img src="gafete.png..jpeg">
         </div>
     </div>
 
@@ -41,33 +41,33 @@
             "Sabía que dirías que sí, creo que te equivocaste",
             "Te doy otra oportunidad",
             "La dislexia no te deja decir que sí",
-            "Te amo, dime que sí",
-            "¡Ya pues, acepta! 😂"
+            "Te amo, dime que sí"
         ];
         let indiceFrase = 0;
 
-        function moverBoton() {
+        function acc No() {
             const btnNo = document.getElementById('no');
             
-            // Cambiar el texto del botón
+            // Cambia el texto
             btnNo.innerText = frases[indiceFrase];
             indiceFrase = (indiceFrase + 1) % frases.length;
 
-            // Mover el botón a un lugar aleatorio
-            const x = Math.random() * (window.innerWidth - btnNo.offsetWidth);
-            const y = Math.random() * (window.innerHeight - btnNo.offsetHeight);
+            // Mueve el botón a una posición aleatoria en la pantalla
+            const padding = 50;
+            const x = Math.random() * (window.innerWidth - btnNo.offsetWidth - padding);
+            const y = Math.random() * (window.innerHeight - btnNo.offsetHeight - padding);
             
             btnNo.style.position = "fixed";
             btnNo.style.left = x + "px";
             btnNo.style.top = y + "px";
+            btnNo.style.transform = "none";
         }
 
         function aceptar() {
-            document.body.innerHTML = `
-                <div class="container">
-                    <h1 style="font-size: 3rem;">¡SABÍA QUE DIRÍAS QUE SÍ! 💜</h1>
-                    <p style="font-size: 1.5rem;">Eres lo mejor que me ha pasado. ¡Nos vemos pronto! 🥰</p>
-                </div>
+            const contenido = document.getElementById('contenido');
+            contenido.innerHTML = `
+                <h1 class="glow">Eres lo mejor que me ha pasado, nos vemos pronto! 🥰</h1>
+                <img src="foto1.jpg..heic" class="final-img">
             `;
             setInterval(crearCorazon, 300);
         }
@@ -78,7 +78,6 @@
             corazon.innerHTML = '💜';
             corazon.style.left = Math.random() * 100 + "vw";
             corazon.style.fontSize = Math.random() * 20 + 20 + "px";
-            corazon.style.duration = Math.random() * 2 + 3 + "s";
             document.body.appendChild(corazon);
             setTimeout(() => { corazon.remove(); }, 3000);
         }
