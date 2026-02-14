@@ -5,136 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Para Isabella 💜</title>
     <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            color: white;
-            text-align: center;
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .container {
-            margin-top: 50px;
-            padding: 20px;
-            z-index: 10;
-        }
-
-        h1 {
-            font-size: 3rem;
-            text-shadow: 0 0 15px #ff4da6;
-            margin-bottom: 10px;
-        }
-
-        .glow {
-            color: #ff66c4;
-            text-shadow: 0 0 20px #ff66c4;
-            font-size: 1.5rem;
-        }
-
-        p {
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 20px auto;
-            line-height: 1.6;
-        }
-
-        .buttons {
-            margin-top: 30px;
-            height: 100px; /* Espacio para que el botón No se mueva */
-        }
-
-        button {
-            padding: 15px 30px;
-            font-size: 18px;
-            margin: 10px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: 0.3s;
-            font-weight: bold;
-        }
-
-        #si {
-            background: #ff4da6;
-            color: white;
-            box-shadow: 0 0 15px #ff4da6;
-        }
-
-        #si:hover {
-            transform: scale(1.2);
-        }
-
-        #no {
-            background: #444;
-            color: white;
-            position: relative;
-        }
-
-        .gallery {
-            margin-top: 50px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            padding-bottom: 50px;
-        }
-
-        .gallery img {
-            width: 250px;
-            height: 350px;
-            object-fit: cover;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(255, 102, 196, 0.5);
-            border: 2px solid #ff66c4;
-            transition: 0.4s;
-        }
-
-        .gallery img:hover {
-            transform: scale(1.05);
-        }
-
-        .heart {
-            position: absolute;
-            color: #ff4da6;
-            animation: fall 3s linear infinite;
-            z-index: 1;
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(-100px); opacity: 1; }
-            100% { transform: translateY(100vh); opacity: 0; }
-        }
+        body { margin: 0; font-family: sans-serif; background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); color: white; text-align: center; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow-x: hidden; }
+        .container { margin-top: 50px; padding: 20px; z-index: 10; }
+        h1 { font-size: 2.5rem; text-shadow: 0 0 15px #ff4da6; }
+        .glow { color: #ff66c4; text-shadow: 0 0 20px #ff66c4; }
+        .buttons { margin-top: 30px; height: 120px; position: relative; width: 100%; }
+        button { padding: 15px 30px; font-size: 18px; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        #si { background: #ff4da6; color: white; box-shadow: 0 0 15px #ff4da6; }
+        #no { background: #444; color: white; position: absolute; left: 50%; transform: translateX(-50%); }
+        .gallery { margin-top: 40px; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; padding-bottom: 50px; }
+        .gallery img { width: 150px; height: 200px; object-fit: cover; border-radius: 15px; border: 2px solid #ff66c4; box-shadow: 0 0 10px #ff66c4; }
+        .heart { position: absolute; color: #ff4da6; animation: fall 3s linear infinite; pointer-events: none; }
+        @keyframes fall { 0% { transform: translateY(-100px); opacity: 1; } 100% { transform: translateY(100vh); opacity: 0; } }
     </style>
 </head>
 <body>
-
     <div class="container">
         <h1>Isabella... 💜</h1>
         <h2 class="glow">¿Quieres seguir siendo mi Nova?</h2>
-        <p>Prometo risas, misterio, miradas intensas <br> 
-        y momentos que solo tú y yo entendemos 😏✨</p>
-
         <div class="buttons">
             <button id="si" onclick="aceptar()">Sí 💘</button>
             <button id="no" onmouseover="mover()" onclick="mover()">No 😶</button>
         </div>
-
         <div class="gallery">
-            <img src="gafete.png" alt="Ing. Coordinador">
-            <img src="foto1.jpg" alt="Nosotros">
-            <img src="foto2.jpg" alt="Momentos">
+            <img src="gafete.png..jpeg" alt="Gafete">
+            <img src="foto1.jpg..heic" alt="Foto 1">
+            <img src="foto2.jpg..jpeg" alt="Foto 2">
         </div>
     </div>
-
     <script>
         function aceptar() {
             alert("Sabía que dirías que sí, Isabella... 💜✨");
-            // Lluvia de corazones
             for(let i=0; i<50; i++) {
                 setTimeout(() => {
                     let heart = document.createElement("div");
@@ -142,20 +43,16 @@
                     heart.innerHTML = "💜";
                     heart.style.left = Math.random() * window.innerWidth + "px";
                     heart.style.fontSize = (Math.random() * 20 + 20) + "px";
-                    heart.style.animationDuration = (Math.random() * 2 + 2) + "s";
                     document.body.appendChild(heart);
                     setTimeout(() => { heart.remove(); }, 3000);
                 }, i * 100);
             }
         }
-
         function mover() {
             let btn = document.getElementById("no");
-            // Calcula límites para que no se salga de la pantalla
             let x = Math.random() * (window.innerWidth - btn.offsetWidth);
             let y = Math.random() * (window.innerHeight - btn.offsetHeight);
-            
-            btn.style.position = "fixed"; // Fixed para que se mueva por toda la pantalla
+            btn.style.position = "fixed";
             btn.style.left = x + "px";
             btn.style.top = y + "px";
         }
