@@ -6,12 +6,13 @@
 <title>Para Isabella 💜</title>
 
 <style>
+*{ box-sizing:border-box; }
+
 body{
     margin:0;
     font-family:sans-serif;
     background: linear-gradient(135deg,#0f0c29,#302b63,#24243e);
     color:white;
-    text-align:center;
     height:100vh;
     display:flex;
     justify-content:center;
@@ -20,30 +21,28 @@ body{
 }
 
 .container{
-    width:100%;
-    max-width:400px;
+    width:90%;
+    max-width:420px;
+    text-align:center;
+    position:relative;
 }
 
 h1{
-    font-size:1.8rem;
+    font-size:1.6rem;
     margin-bottom:15px;
-    text-shadow:0 0 10px #ff4da6;
 }
 
-.glow{
-    color:#ff66c4;
-    text-shadow:0 0 15px #ff66c4;
-}
+.glow{ color:#ff66c4; }
 
 .buttons{
     position:relative;
     height:80px;
-    margin-bottom:15px;
+    margin-bottom:10px;
 }
 
 button{
     padding:10px 20px;
-    font-size:16px;
+    font-size:15px;
     border:none;
     border-radius:40px;
     cursor:pointer;
@@ -53,6 +52,7 @@ button{
 #si{
     background:#ff4da6;
     color:white;
+    margin-right:15px;
 }
 
 #no{
@@ -61,8 +61,19 @@ button{
     position:absolute;
     left:55%;
     top:0;
+    z-index:50;
 }
 
+/* FRASE FLOTANTE */
+#mensaje{
+    height:30px;
+    margin-bottom:10px;
+    font-weight:bold;
+    color:#ff66c4;
+    transition:opacity 0.3s;
+}
+
+/* GALERÍA */
 .gallery{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -71,16 +82,16 @@ button{
 
 .gallery img{
     width:100%;
-    height:140px;
+    height:130px;
     object-fit:cover;
     border-radius:12px;
     border:2px solid #ff66c4;
 }
 
-.gallery img:last-child{
+.gallery img:nth-child(3){
     grid-column:1 / span 2;
-    width:60%;
-    margin:auto;
+    width:65%;
+    justify-self:center;
 }
 </style>
 </head>
@@ -97,6 +108,8 @@ Isabella <span class="glow">¿Quieres ser mi San Valentín??</span> 💜
 <button id="si" onclick="aceptar()">Sí 💖</button>
 <button id="no" onclick="moverBoton()">No</button>
 </div>
+
+<div id="mensaje"></div>
 
 <div class="gallery">
 <img src="foto1.jpg..heic">
@@ -119,10 +132,15 @@ let indice = 0;
 
 function moverBoton(){
     const btn = document.getElementById("no");
+    const mensaje = document.getElementById("mensaje");
 
-    btn.innerText = frases[indice];
+    // Mostrar frase
+    mensaje.innerText = frases[indice];
+    mensaje.style.opacity = "1";
+
     indice = (indice + 1) % frases.length;
 
+    // Mover botón dentro de la pantalla
     let maxX = window.innerWidth - btn.offsetWidth - 20;
     let maxY = window.innerHeight - btn.offsetHeight - 20;
 
@@ -132,6 +150,12 @@ function moverBoton(){
     btn.style.position = "fixed";
     btn.style.left = x + "px";
     btn.style.top = y + "px";
+
+    // Ocultar frase después de 1.5 segundos
+    setTimeout(()=>{
+        mensaje.style.opacity = "0";
+        mensaje.innerText = "";
+    },1500);
 }
 
 function aceptar(){
@@ -149,8 +173,8 @@ text-align:center;
 color:white;
 padding:20px;
 ">
-<h1 style="font-size:2.2rem;">Eres lo mejor que me ha pasado 💖</h1>
-<p style="font-size:1.4rem;">Nos vemos pronto. Te amo 🩷</p>
+<h1 style="font-size:2rem;">Eres lo mejor que me ha pasado 💖</h1>
+<p style="font-size:1.3rem;">Nos vemos pronto. Te amo 🩷</p>
 </div>
 `;
 }
