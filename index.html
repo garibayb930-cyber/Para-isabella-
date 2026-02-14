@@ -32,13 +32,18 @@ h1{
 
 .glow{ color:#ff66c4; }
 
-.buttons{
+/* Área donde se mueven los botones */
+.area-movimiento{
     position:relative;
-    height:70px;
+    width:100%;
+    height:160px;
     margin-bottom:10px;
 }
 
-button{
+/* BOTÓN SÍ */
+#si{
+    background:#ff4da6;
+    color:white;
     padding:10px 20px;
     font-size:15px;
     border:none;
@@ -46,20 +51,27 @@ button{
     cursor:pointer;
     font-weight:bold;
     position:absolute;
+    left:50%;
+    bottom:0;
+    transform:translateX(-50%) scale(1);
+    transition:0.3s;
+    z-index:5;
 }
 
-#si{
-    background:#ff4da6;
-    color:white;
-    left:20px;
-    top:10px;
-}
-
+/* BOTÓN NO */
 #no{
     background:#444;
     color:white;
-    right:20px;
+    padding:10px 20px;
+    font-size:15px;
+    border:none;
+    border-radius:40px;
+    cursor:pointer;
+    font-weight:bold;
+    position:absolute;
     top:10px;
+    left:10px;
+    z-index:10;
 }
 
 #mensaje{
@@ -67,7 +79,6 @@ button{
     margin-bottom:10px;
     font-weight:bold;
     color:#ff66c4;
-    transition:opacity 0.3s;
 }
 
 /* GALERÍA 2 ARRIBA 1 ABAJO */
@@ -101,9 +112,9 @@ button{
 Isabella <span class="glow">¿Quieres ser mi San Valentín??</span> 💜
 </h1>
 
-<div class="buttons" id="areaBotones">
-<button id="si" onclick="aceptar()">Sí 💖</button>
-<button id="no" onclick="moverBoton()">No</button>
+<div class="area-movimiento" id="area">
+    <button id="no" onclick="moverBoton()">No</button>
+    <button id="si" onclick="aceptar()">Sí 💖</button>
 </div>
 
 <div id="mensaje"></div>
@@ -126,31 +137,36 @@ let frases = [
 ];
 
 let indice = 0;
+let escalaSi = 1;
 
 function moverBoton(){
-    const btn = document.getElementById("no");
+    const btnNo = document.getElementById("no");
+    const btnSi = document.getElementById("si");
     const mensaje = document.getElementById("mensaje");
-    const area = document.getElementById("areaBotones");
+    const area = document.getElementById("area");
 
     // Mostrar frase
     mensaje.innerText = frases[indice];
-    mensaje.style.opacity = "1";
-
     indice = (indice + 1) % frases.length;
 
-    // límites dentro del área de botones
-    let maxX = area.offsetWidth - btn.offsetWidth;
-    let maxY = area.offsetHeight - btn.offsetHeight;
+    // Hacer crecer el botón SÍ con límite
+    if(escalaSi < 1.8){
+        escalaSi += 0.15;
+        btnSi.style.transform = `translateX(-50%) scale(${escalaSi})`;
+    }
+
+    // Mover botón NO dentro del área
+    let maxX = area.offsetWidth - btnNo.offsetWidth;
+    let maxY = area.offsetHeight - btnNo.offsetHeight - 40;
 
     let x = Math.random() * maxX;
     let y = Math.random() * maxY;
 
-    btn.style.left = x + "px";
-    btn.style.top = y + "px";
+    btnNo.style.left = x + "px";
+    btnNo.style.top = y + "px";
 
-    // Ocultar frase
+    // Quitar frase después
     setTimeout(()=>{
-        mensaje.style.opacity = "0";
         mensaje.innerText = "";
     },1500);
 }
