@@ -81,11 +81,10 @@ h1{
 }
 
 /* GALERÍA */
-.gallery {
+.gallery{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:10px;
-    pointer-events: none; /* Esto permite hacer click en botones aunque la galería esté encima */
 }
 
 .gallery img{
@@ -134,13 +133,7 @@ let frases = [
 "Te doy otra oportunidad",
 "La dislexia no te deja decir que sí",
 "Te amo dime que sí",
-"Amor por favor 🥺",
-"Creo que tu dedo se resbaló...",
-"Reinicia la página e intenta de nuevo",
-"Error 404: Respuesta incorrecta",
-"Eso no estaba en el guion",
-"El botón correcto es el rosita 👀",
-"Intento inválido, inténtalo otra vez"
+"Amor por favor 🥺"
 ];
 
 let indice = 0;
@@ -174,7 +167,7 @@ function moverBoton(){
 
     setTimeout(()=>{
         mensaje.innerText = "";
-    },3500);
+    },1500);
 }
 
 function aceptar(){
