@@ -12,39 +12,40 @@ body{
     background: linear-gradient(135deg,#0f0c29,#302b63,#24243e);
     color:white;
     text-align:center;
+    height:100vh;
     display:flex;
-    flex-direction:column;
+    justify-content:center;
     align-items:center;
-    min-height:100vh;
     overflow:hidden;
 }
 
 .container{
-    margin-top:40px;
-    z-index:10;
+    width:100%;
+    max-width:400px;
 }
 
 h1{
-    font-size:2.5rem;
-    text-shadow:0 0 15px #ff4da6;
+    font-size:1.8rem;
+    margin-bottom:15px;
+    text-shadow:0 0 10px #ff4da6;
 }
 
 .glow{
     color:#ff66c4;
-    text-shadow:0 0 20px #ff66c4;
+    text-shadow:0 0 15px #ff66c4;
 }
 
 .buttons{
-    margin-top:30px;
     position:relative;
-    height:120px;
+    height:80px;
+    margin-bottom:15px;
 }
 
 button{
-    padding:15px 30px;
-    font-size:18px;
+    padding:10px 20px;
+    font-size:16px;
     border:none;
-    border-radius:50px;
+    border-radius:40px;
     cursor:pointer;
     font-weight:bold;
 }
@@ -52,41 +53,34 @@ button{
 #si{
     background:#ff4da6;
     color:white;
-    margin-right:20px;
 }
 
 #no{
     background:#444;
     color:white;
     position:absolute;
-    left:60%;
+    left:55%;
+    top:0;
 }
 
 .gallery{
-    margin-top:40px;
-    display:flex;
-    gap:15px;
-    justify-content:center;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
 }
 
 .gallery img{
-    width:150px;
-    height:200px;
+    width:100%;
+    height:140px;
     object-fit:cover;
-    border-radius:15px;
+    border-radius:12px;
     border:2px solid #ff66c4;
-    box-shadow:0 0 10px #ff66c4;
 }
 
-.heart{
-    position:fixed;
-    color:#ff4da6;
-    animation:fall 3s linear infinite;
-}
-
-@keyframes fall{
-    0%{transform:translateY(-100px);opacity:1;}
-    100%{transform:translateY(100vh);opacity:0;}
+.gallery img:last-child{
+    grid-column:1 / span 2;
+    width:60%;
+    margin:auto;
 }
 </style>
 </head>
@@ -94,7 +88,10 @@ button{
 <body>
 
 <div class="container">
-<h1>Isabella <span class="glow">¿Quieres ser mi San Valentín??</span> 💜</h1>
+
+<h1>
+Isabella <span class="glow">¿Quieres ser mi San Valentín??</span> 💜
+</h1>
 
 <div class="buttons">
 <button id="si" onclick="aceptar()">Sí 💖</button>
@@ -102,14 +99,14 @@ button{
 </div>
 
 <div class="gallery">
-<img src="foto1.jpg..heic" alt="Nosotros 1">
-<img src="foto2.jpg..jpeg" alt="Nosotros 2">
-<img src="gafete.png..jpeg" alt="Gafete">
+<img src="foto1.jpg..heic">
+<img src="foto2.jpg..jpeg">
+<img src="gafete.png..jpeg">
 </div>
+
 </div>
 
 <script>
-
 let frases = [
 "Creo que te equivocaste",
 "Te doy otra oportunidad",
@@ -121,17 +118,20 @@ let frases = [
 let indice = 0;
 
 function moverBoton(){
-const btn = document.getElementById("no");
+    const btn = document.getElementById("no");
 
-btn.innerText = frases[indice];
-indice = (indice + 1) % frases.length;
+    btn.innerText = frases[indice];
+    indice = (indice + 1) % frases.length;
 
-let x = Math.random() * (window.innerWidth - btn.offsetWidth);
-let y = Math.random() * (window.innerHeight - btn.offsetHeight);
+    let maxX = window.innerWidth - btn.offsetWidth - 20;
+    let maxY = window.innerHeight - btn.offsetHeight - 20;
 
-btn.style.position = "fixed";
-btn.style.left = x + "px";
-btn.style.top = y + "px";
+    let x = Math.random() * maxX;
+    let y = Math.random() * maxY;
+
+    btn.style.position = "fixed";
+    btn.style.left = x + "px";
+    btn.style.top = y + "px";
 }
 
 function aceptar(){
@@ -147,24 +147,13 @@ justify-content:center;
 align-items:center;
 text-align:center;
 color:white;
+padding:20px;
 ">
-<h1 style="font-size:3rem;">Eres lo mejor que me ha pasado 💖</h1>
-<p style="font-size:1.8rem;">Nos vemos pronto. Te amo 🩷</p>
+<h1 style="font-size:2.2rem;">Eres lo mejor que me ha pasado 💖</h1>
+<p style="font-size:1.4rem;">Nos vemos pronto. Te amo 🩷</p>
 </div>
 `;
-setInterval(crearCorazon,300);
 }
-
-function crearCorazon(){
-const heart = document.createElement("div");
-heart.classList.add("heart");
-heart.innerHTML = "💜";
-heart.style.left = Math.random()*100 + "vw";
-heart.style.fontSize = (Math.random()*20 + 20) + "px";
-document.body.appendChild(heart);
-setTimeout(()=>heart.remove(),3000);
-}
-
 </script>
 
 </body>
