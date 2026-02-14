@@ -17,12 +17,14 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
+    overflow: hidden; /* Evita que salgan barras de scroll */
 }
 
 .container{
     width:90%;
     max-width:420px;
     text-align:center;
+    position: relative;
 }
 
 h1{
@@ -32,38 +34,39 @@ h1{
 
 .glow{ color:#ff66c4; }
 
-/* Área grande para mover el botón NO */
+/* Área más grande para que el NO tenga espacio */
 .area-movimiento{
     position:relative;
     width:100%;
-    height:200px;
+    height:250px; 
     margin-bottom:15px;
 }
 
-/* BOTÓN SÍ */
+/* BOTÓN SÍ - Subimos el z-index para que NADA lo tape */
 #si{
     background:#ff4da6;
     color:white;
-    padding:10px 20px;
-    font-size:15px;
+    padding:12px 25px;
+    font-size:16px;
     border:none;
     border-radius:40px;
     cursor:pointer;
     font-weight:bold;
     position:absolute;
-    bottom:10px;
+    bottom:20px;
     left:50%;
     transform:translateX(-50%) scale(1);
     transition:transform 0.3s ease;
-    z-index:5;
+    z-index:100; /* Super alto para estar siempre arriba */
+    box-shadow: 0 0 15px #ff4da6;
 }
 
-/* BOTÓN NO */
+/* BOTÓN NO - Bajamos el z-index */
 #no{
     background:#444;
     color:white;
     padding:10px 20px;
-    font-size:15px;
+    font-size:14px;
     border:none;
     border-radius:40px;
     cursor:pointer;
@@ -71,7 +74,8 @@ h1{
     position:absolute;
     top:20px;
     left:20px;
-    z-index:10;
+    z-index:10; /* Menor que el botón SÍ */
+    transition: all 0.2s ease;
 }
 
 #mensaje{
@@ -81,7 +85,6 @@ h1{
     color:#ff66c4;
 }
 
-/* GALERÍA */
 .gallery{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -90,16 +93,10 @@ h1{
 
 .gallery img{
     width:100%;
-    height:130px;
+    height:100px;
     object-fit:cover;
     border-radius:12px;
     border:2px solid #ff66c4;
-}
-
-.gallery img:nth-child(3){
-    grid-column:1 / span 2;
-    width:65%;
-    justify-self:center;
 }
 </style>
 </head>
@@ -108,19 +105,16 @@ h1{
 
 <div class="container">
 
-<h1>
-Isabella <span class="glow">¿Quieres ser mi San Valentín??</span> 💜
-</h1>
-
-<div class="area-movimiento" id="area">
-    <button id="no" onclick="moverBoton()">No</button>
-    <button id="si" onclick="aceptar()">Sí 💖</button>
-</div>
+<h1>Isabella <span class="glow">¿Quieres ser mi San Valentín?</span> 💜</h1>
 
 <div id="mensaje"></div>
 
+<div class="area-movimiento" id="area">
+    <button id="si" onclick="aceptar()">Sí 💖</button>
+    <button id="no" onmouseover="moverBoton()" onclick="moverBoton()">No</button>
+</div>
+
 <div class="gallery">
-<img src="foto1.jpg..heic">
 <img src="foto2.jpg..jpeg">
 <img src="gafete.png..jpeg">
 </div>
@@ -149,13 +143,11 @@ function moverBoton(){
     mensaje.innerText = frases[indice];
     indice = (indice + 1) % frases.length;
 
-    // CRECER SOLO EL BOTÓN SÍ
-    if(escalaSi < 1.7){
-        escalaSi += 0.1;
-        btnSi.style.transform = `translateX(-50%) scale(${escalaSi})`;
-    }
+    // EL SÍ CRECE CADA VEZ QUE INTENTA DARLE AL NO
+    escalaSi += 0.15;
+    btnSi.style.transform = `translateX(-50%) scale(${escalaSi})`;
 
-    // MOVER BOTÓN NO POR TODA EL ÁREA
+    // MOVER BOTÓN NO (Asegurando que no se salga del área)
     let maxX = area.clientWidth - btnNo.offsetWidth;
     let maxY = area.clientHeight - btnNo.offsetHeight;
 
@@ -164,19 +156,16 @@ function moverBoton(){
 
     btnNo.style.left = x + "px";
     btnNo.style.top = y + "px";
-
-    setTimeout(()=>{
-        mensaje.innerText = "";
-    },1500);
 }
 
 function aceptar(){
 document.body.innerHTML = `
 <div style="
-background:url('foto1.jpg..heic');
+background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('foto1.jpg..heic');
 background-size:cover;
 background-position:center;
 height:100vh;
+width:100vw;
 display:flex;
 flex-direction:column;
 justify-content:center;
@@ -185,8 +174,8 @@ text-align:center;
 color:white;
 padding:20px;
 ">
-<h1 style="font-size:2rem;">Eres lo mejor que me ha pasado 💖</h1>
-<p style="font-size:1.3rem;">Nos vemos pronto. Te amo 🩷</p>
+<h1 style="font-size:2.5rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.8);">¡Eres lo mejor que me ha pasado! 💖</h1>
+<p style="font-size:1.5rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.8);">Nos vemos pronto. Te amo 🩷</p>
 </div>
 `;
 }
