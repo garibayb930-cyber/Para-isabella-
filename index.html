@@ -9,7 +9,7 @@
         .container { margin-top: 50px; padding: 20px; z-index: 10; }
         h1 { font-size: 2.5rem; text-shadow: 0 0 15px #ff4da6; }
         .glow { color: #ff66c4; text-shadow: 0 0 20px #ff66c4; }
-        .buttons { margin-top: 30px; height: 120px; position: relative; width: 100%; }
+        .buttons { margin-top: 30px; height: 150px; position: relative; width: 100%; }
         button { padding: 15px 30px; font-size: 18px; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; transition: 0.3s; }
         #si { background: #ff4da6; color: white; box-shadow: 0 0 15px #ff4da6; }
         #no { background: #444; color: white; position: absolute; left: 50%; transform: translateX(-50%); }
@@ -20,41 +20,67 @@
     </style>
 </head>
 <body>
+
     <div class="container">
-        <h1>Isabella... 💜</h1>
-        <h2 class="glow">¿Quieres seguir siendo mi Nova?</h2>
+        <h1>Isabella, <span class="glow">¿Quieres ser mi San Valentín?</span> 💜</h1>
+        
         <div class="buttons">
-            <button id="si" onclick="aceptar()">Sí 💘</button>
-            <button id="no" onmouseover="mover()" onclick="mover()">No 😶</button>
+            <button id="si" onclick="aceptar()">¡SÍ! 😍</button>
+            <button id="no" onmouseover="moverBoton()" onclick="moverBoton()">No</button>
         </div>
+
         <div class="gallery">
+            <img src="foto1.jpg..heic" alt="Nosotros 1">
+            <img src="foto2.jpg..jpeg" alt="Nosotros 2">
             <img src="gafete.png..jpeg" alt="Gafete">
-            <img src="foto1.jpg..heic" alt="Foto 1">
-            <img src="foto2.jpg..jpeg" alt="Foto 2">
         </div>
     </div>
+
     <script>
-        function aceptar() {
-            alert("Sabía que dirías que sí, Isabella... 💜✨");
-            for(let i=0; i<50; i++) {
-                setTimeout(() => {
-                    let heart = document.createElement("div");
-                    heart.className = "heart";
-                    heart.innerHTML = "💜";
-                    heart.style.left = Math.random() * window.innerWidth + "px";
-                    heart.style.fontSize = (Math.random() * 20 + 20) + "px";
-                    document.body.appendChild(heart);
-                    setTimeout(() => { heart.remove(); }, 3000);
-                }, i * 100);
-            }
+        let frases = [
+            "Sabía que dirías que sí, creo que te equivocaste",
+            "Te doy otra oportunidad",
+            "La dislexia no te deja decir que sí",
+            "Te amo, dime que sí",
+            "¡Ya pues, acepta! 😂"
+        ];
+        let indiceFrase = 0;
+
+        function moverBoton() {
+            const btnNo = document.getElementById('no');
+            
+            // Cambiar el texto del botón
+            btnNo.innerText = frases[indiceFrase];
+            indiceFrase = (indiceFrase + 1) % frases.length;
+
+            // Mover el botón a un lugar aleatorio
+            const x = Math.random() * (window.innerWidth - btnNo.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btnNo.offsetHeight);
+            
+            btnNo.style.position = "fixed";
+            btnNo.style.left = x + "px";
+            btnNo.style.top = y + "px";
         }
-        function mover() {
-            let btn = document.getElementById("no");
-            let x = Math.random() * (window.innerWidth - btn.offsetWidth);
-            let y = Math.random() * (window.innerHeight - btn.offsetHeight);
-            btn.style.position = "fixed";
-            btn.style.left = x + "px";
-            btn.style.top = y + "px";
+
+        function aceptar() {
+            document.body.innerHTML = `
+                <div class="container">
+                    <h1 style="font-size: 3rem;">¡SABÍA QUE DIRÍAS QUE SÍ! 💜</h1>
+                    <p style="font-size: 1.5rem;">Eres lo mejor que me ha pasado. ¡Nos vemos pronto! 🥰</p>
+                </div>
+            `;
+            setInterval(crearCorazon, 300);
+        }
+
+        function crearCorazon() {
+            const corazon = document.createElement('div');
+            corazon.classList.add('heart');
+            corazon.innerHTML = '💜';
+            corazon.style.left = Math.random() * 100 + "vw";
+            corazon.style.fontSize = Math.random() * 20 + 20 + "px";
+            corazon.style.duration = Math.random() * 2 + 3 + "s";
+            document.body.appendChild(corazon);
+            setTimeout(() => { corazon.remove(); }, 3000);
         }
     </script>
 </body>
