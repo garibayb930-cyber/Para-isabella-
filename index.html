@@ -81,10 +81,11 @@ h1{
 }
 
 /* GALERÍA */
-.gallery{
+.gallery {
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:10px;
+    pointer-events: none; /* Esto permite hacer click en botones aunque la galería esté encima */
 }
 
 .gallery img{
